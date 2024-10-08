@@ -8,4 +8,4 @@ numpy, pymongo, streamlit e pandas
 e depois pode rodar o streamlit
 (rodei numa .venv) mas pode rodar normalmente com o comando
 
-python -m streamlit run clashroyy.py
+- python -m streamlit run clashroyy.py
