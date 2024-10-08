@@ -76,11 +76,9 @@ def get_combo_wins(deck_size, win_rate_threshold):
     
     return combos
 
-# Configuração do Streamlit
 st.title("Análise de Dados Clash Royale")
-st.header("Dados Reais de Batalhas")
+st.header("Dados de Batalhas")
 
-# Consulta 1: Porcentagem de vitórias e derrotas de uma carta
 card_name = st.selectbox("Selecione uma carta:", df_cards['name'].tolist())
 
 if st.button("Calcular Porcentagem de Vitórias e Derrotas"):
@@ -88,7 +86,6 @@ if st.button("Calcular Porcentagem de Vitórias e Derrotas"):
     st.write(f"Porcentagem de Vitórias: {win_rate}%")
     st.write(f"Porcentagem de Derrotas: {loss_rate}%")
 
-# Consulta 2: Listar decks com mais de X% de vitórias
 threshold = st.number_input("Defina um percentual de vitórias:", min_value=0.0, max_value=100.0, value=50.0)
 
 if st.button("Listar Decks Acima do Percentual"):
@@ -101,7 +98,7 @@ if st.button("Listar Decks Acima do Percentual"):
     else:
         st.write("Nenhum deck encontrado com os critérios especificados.")
 
-# Consulta 3: Calcular a quantidade de derrotas utilizando o combo de cartas
+
 combo = st.text_input("Insira o combo de cartas (separadas por vírgula):", "Giant,Musketeer")
 combo_list = [card.strip() for card in combo.split(",")]
 
@@ -109,7 +106,6 @@ if st.button("Calcular Derrotas com o Combo de Cartas"):
     losses = calculate_losses_with_combo(combo_list)
     st.write(f"Quantidade de derrotas com o combo {combo_list}: {losses}")
 
-# Consulta 4: Calcular a quantidade de vitórias com condições
 trophy_diff = st.number_input("Diferença de troféus do vencedor:", value=100)
 tower_destroyed = st.number_input("Número de torres destruídas pelo perdedor:", value=2)
 
@@ -117,7 +113,6 @@ if st.button("Calcular Vitórias com Condições"):
     wins = calculate_wins_with_conditions(card_name, trophy_diff, tower_destroyed)
     st.write(f"Quantidade de vitórias com as condições especificadas: {wins}")
 
-# Consulta 5: Listar combos de cartas que produziram mais de Y% de vitórias
 deck_size = st.slider("Selecione o tamanho do combo de cartas:", 1, 8, 3)
 win_rate_threshold_combo = st.slider("Selecione o limite de porcentagem de vitórias para combos:", 0.0, 100.0, 50.0)
 
@@ -125,7 +120,7 @@ if st.button("Listar Combos de Cartas com mais de Y% de Vitórias"):
     combos = get_combo_wins(deck_size, win_rate_threshold_combo)
     if combos:
         for combo, win_rate in combos:
-            deck_string = ", ".join(combo)  # Convertendo o combo para uma string
+            deck_string = ", ".join(combo) 
             st.write(f"Combo: {deck_string}, Porcentagem de Vitórias: {win_rate}%")
     else:
         st.write("Nenhum combo encontrado com a porcentagem de vitórias especificada.")
